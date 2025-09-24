@@ -14,7 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      job_seeker_registrations: {
+        Row: {
+          availability: string
+          created_at: string
+          email: string
+          event_preferences: string[] | null
+          full_name: string
+          id: string
+          industry: string | null
+          job_title: string | null
+          linkedin_profile: string | null
+          phone: string
+          resume_url: string | null
+          updated_at: string
+          years_experience: number | null
+        }
+        Insert: {
+          availability: string
+          created_at?: string
+          email: string
+          event_preferences?: string[] | null
+          full_name: string
+          id?: string
+          industry?: string | null
+          job_title?: string | null
+          linkedin_profile?: string | null
+          phone: string
+          resume_url?: string | null
+          updated_at?: string
+          years_experience?: number | null
+        }
+        Update: {
+          availability?: string
+          created_at?: string
+          email?: string
+          event_preferences?: string[] | null
+          full_name?: string
+          id?: string
+          industry?: string | null
+          job_title?: string | null
+          linkedin_profile?: string | null
+          phone?: string
+          resume_url?: string | null
+          updated_at?: string
+          years_experience?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
