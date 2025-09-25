@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -10,9 +10,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
-import { Link } from "react-router-dom";
+import { toast } from "@/components/ui/use-toast";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Briefcase, Calendar } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const jobSeekerSchema = z.object({
   fullName: z.string().trim().min(1, "Full name is required").max(100, "Name too long"),
@@ -32,6 +33,19 @@ type JobSeekerFormData = z.infer<typeof jobSeekerSchema>;
 const JobSeekerSignup = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [eventPreferences, setEventPreferences] = useState<string[]>([]);
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      toast({
+        variant: "destructive",
+        title: "Authentication Required",
+        description: "Please log in to register for job fairs.",
+      });
+      navigate('/auth');
+    }
+  }, [user, loading, navigate]);
 
   const form = useForm<JobSeekerFormData>({
     resolver: zodResolver(jobSeekerSchema),
@@ -59,6 +73,15 @@ const JobSeekerSignup = () => {
   };
 
   const onSubmit = async (data: JobSeekerFormData) => {
+    if (!user) {
+      toast({
+        variant: "destructive",
+        title: "Authentication Required",
+        description: "Please log in to submit your registration.",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
@@ -75,26 +98,59 @@ const JobSeekerSignup = () => {
           job_title: data.jobTitle,
           availability: data.availability,
           event_preferences: data.eventPreferences,
+          user_id: user.id,
         });
 
       if (error) {
+        console.error("Registration error:", error);
         if (error.code === "23505") {
-          toast.error("This email is already registered. Please use a different email.");
+          toast({
+            variant: "destructive",
+            title: "Registration Failed",
+            description: "This email is already registered. Please use a different email.",
+          });
         } else {
-          toast.error("Registration failed. Please try again.");
+          toast({
+            variant: "destructive",
+            title: "Registration Failed", 
+            description: "Registration failed. Please try again.",
+          });
         }
         return;
       }
 
-      toast.success("Registration successful! We'll contact you soon with event details.");
+      toast({
+        title: "Registration Successful!",
+        description: "We'll contact you soon with event details.",
+      });
       form.reset();
       setEventPreferences([]);
     } catch (error) {
-      toast.error("An unexpected error occurred. Please try again.");
+      console.error("Unexpected error:", error);
+      toast({
+        variant: "destructive",
+        title: "Registration Failed",
+        description: "An unexpected error occurred. Please try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null; // Will redirect to auth page via useEffect
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/5">
