@@ -25,7 +25,7 @@ const HeroSection = () => {
               size="lg" 
               className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 text-lg"
             >
-              SIGN UP FOR JOB FAIRS
+              SIGN UP FOR JOB FAIR
             </Button>
           </Link>
           <Button 
