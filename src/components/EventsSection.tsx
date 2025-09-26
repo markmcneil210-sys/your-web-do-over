@@ -37,6 +37,22 @@ const EventsSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Upcoming Events Section */}
+          <div className="md:col-span-2 mb-8">
+            <h3 className="text-2xl font-bold mb-6 text-center">Upcoming Events</h3>
+            <div className="flex justify-center">
+              <Card className="max-w-md transition-all duration-300 hover:shadow-lg">
+                <CardContent className="p-4">
+                  <img 
+                    src="/src/assets/hiring-for-holidays-flyer-2025.jpg" 
+                    alt="Hiring for the Holidays Job Fair - November 13th, 2025 at World Harvest Outreach Church"
+                    className="w-full h-auto rounded-lg"
+                  />
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
           {/* Featured Event with Image */}
           <Card className="md:col-span-2 border-primary bg-primary/5">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
