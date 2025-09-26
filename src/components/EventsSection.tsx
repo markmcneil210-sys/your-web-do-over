@@ -30,7 +30,7 @@ const EventsSection = () => {
     <section className="py-16 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-6">Recent Events</h2>
+          <h2 className="text-4xl font-bold mb-6">Our Events</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             The AEA and its partners host successful hiring events that are well attended 
             and provide numerous job opportunities for seekers in attendance.
@@ -52,6 +52,11 @@ const EventsSection = () => {
                 </CardContent>
               </Card>
             </div>
+          </div>
+
+          {/* Recent Events Title */}
+          <div className="md:col-span-2 mb-6">
+            <h3 className="text-2xl font-bold text-center">Recent Events</h3>
           </div>
 
           {/* Featured Event with Image */}
