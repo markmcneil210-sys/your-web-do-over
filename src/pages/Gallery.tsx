@@ -13,6 +13,7 @@ import jobFairFlyer2023 from "@/assets/job-fair-flyer-2023.jpg";
 import eventThumbnail from "@/assets/event-thumbnail.jpg";
 import jobFairHero from "@/assets/job-fair-hero.jpg";
 import hiringForHolidaysFlyer2025 from "@/assets/hiring-for-holidays-flyer-2025.jpg";
+import sunnysideJobFairApril2024 from "@/assets/sunnyside-job-fair-april-2024.jpg";
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -65,6 +66,12 @@ const Gallery = () => {
       alt: "Hiring for the Holidays Job Fair 2025",
       title: "Holidays Hiring 2025",
       category: "flyers"
+    },
+    {
+      src: sunnysideJobFairApril2024,
+      alt: "Sunnyside Job Fair April 2024 networking event",
+      title: "Sunnyside Job Fair April 2024",
+      category: "events"
     }
   ];
 
