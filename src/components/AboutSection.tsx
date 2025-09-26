@@ -14,17 +14,14 @@ const AboutSection = () => {
               and the importance it plays in students perspective career path.
             </p>
           </div>
-          <div className="space-y-4">
-            <img 
-              src="/src/assets/group-volunteer-huddles.jpg" 
-              alt="Group of volunteers forming huddles at community event"
-              className="rounded-lg shadow-lg w-full"
-            />
-            <img 
-              src="/src/assets/volunteer-portrait-huddles.jpg" 
-              alt="Portrait of volunteer group forming huddles"
-              className="rounded-lg shadow-lg w-full"
-            />
+          <div className="bg-white rounded-lg p-8 shadow-lg">
+            <h3 className="text-2xl font-bold mb-4">SOCIAL IMPACT</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Social and economic factors, such as income, education, employment, 
+              community safety, and social supports can significantly affect how well 
+              and how long we live. For example, employment provides income that shapes 
+              choices about housing, education, child care, food, medical care, and more.
+            </p>
           </div>
         </div>
       </div>
