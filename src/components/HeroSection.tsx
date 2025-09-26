@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/job-fair-hero.jpg";
 
 const HeroSection = () => {
@@ -18,12 +19,23 @@ const HeroSection = () => {
         <h2 className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
           Elevate Mentorship Program by Rebuild Networking
         </h2>
-        <Button 
-          size="lg" 
-          className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 text-lg"
-        >
-          DONATE NOW
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link to="/signup">
+            <Button 
+              size="lg" 
+              className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 text-lg"
+            >
+              SIGN UP FOR JOB FAIRS
+            </Button>
+          </Link>
+          <Button 
+            size="lg" 
+            variant="outline"
+            className="bg-white/10 text-white border-white hover:bg-white hover:text-black px-8 py-3 text-lg"
+          >
+            DONATE NOW
+          </Button>
+        </div>
       </div>
     </section>
   );
