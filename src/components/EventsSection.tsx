@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import hiringForHolidaysFlyer2025 from "@/assets/hiring-for-holidays-flyer-2025.jpg";
+import hiringForHolidaysFlyer2025 from "@/assets/hiring-for-holidays-flyer-2025-updated.jpg";
 
 const EventsSection = () => {
   const events = [
