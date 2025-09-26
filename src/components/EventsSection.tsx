@@ -37,15 +37,38 @@ const EventsSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {events.map((event, index) => (
+          {/* Featured Event with Image */}
+          <Card className="md:col-span-2 border-primary bg-primary/5">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div>
+                <img 
+                  src="/src/assets/sunnyside-job-fair-2023.png" 
+                  alt="Sunnyside Job Fair 2023 event photo"
+                  className="w-full h-64 object-cover rounded-lg"
+                />
+              </div>
+              <div className="p-6">
+                <CardHeader className="p-0">
+                  <CardTitle className="text-primary text-lg">July 13th, 2023</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0 mt-4">
+                  <h3 className="font-semibold text-xl mb-2">Sunnyside Job Fair</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Thanks to Houston Magic 102, 97.9 the Boxx and Praise 92.1 their support made the Job Fair a success. 
+                    We were blessed to serve over 300 Job Seekers.
+                  </p>
+                </CardContent>
+              </div>
+            </div>
+          </Card>
+
+          {events.slice(0, 3).map((event, index) => (
             <Card 
               key={index} 
-              className={`transition-all duration-300 hover:shadow-lg ${
-                event.highlight ? 'border-primary bg-primary/5' : ''
-              }`}
+              className="transition-all duration-300 hover:shadow-lg"
             >
               <CardHeader>
-                <CardTitle className={`text-lg ${event.highlight ? 'text-primary' : ''}`}>
+                <CardTitle className="text-lg">
                   {event.date}
                 </CardTitle>
               </CardHeader>
@@ -57,6 +80,17 @@ const EventsSection = () => {
               </CardContent>
             </Card>
           ))}
+
+          {/* Event Flyer */}
+          <Card className="transition-all duration-300 hover:shadow-lg">
+            <CardContent className="p-4">
+              <img 
+                src="/src/assets/job-fair-flyer-2023.jpg" 
+                alt="Sunnyside Job Fair Flyer July 2023"
+                className="w-full h-auto rounded-lg"
+              />
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
