@@ -20,13 +20,6 @@ const Gallery = () => {
 
   const galleryItems = [
     {
-      type: "video",
-      src: "https://drive.google.com/file/d/1TV1k3nMaBLsTQS3Jy5wrzndY0X5QHKTc/preview",
-      alt: "July 2024 Hiring Event had a record 1400 job seekers signup",
-      title: "July 2024 Hiring Event had a record 1400 job seekers signup",
-      category: "events"
-    },
-    {
       type: "image",
       src: jobFairHero,
       alt: "Job fair hero image showcasing community impact",

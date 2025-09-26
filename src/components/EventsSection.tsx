@@ -92,7 +92,9 @@ const EventsSection = () => {
           {events.map((event, index) => (
             <Card 
               key={index} 
-              className="transition-all duration-300 hover:shadow-lg"
+              className={`transition-all duration-300 hover:shadow-lg ${
+                event.date === "October 17th, 2024" ? "md:col-span-2" : ""
+              }`}
             >
               <CardHeader>
                 <CardTitle className="text-lg">
@@ -101,9 +103,20 @@ const EventsSection = () => {
               </CardHeader>
               <CardContent>
                 <h3 className="font-semibold text-xl mb-2">{event.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed mb-4">
                   {event.description}
                 </p>
+                {event.date === "October 17th, 2024" && (
+                  <div className="bg-muted/30 rounded-lg p-4">
+                    <p className="text-sm font-medium mb-2 text-primary">Event Video</p>
+                    <iframe
+                      src="https://drive.google.com/file/d/1TV1k3nMaBLsTQS3Jy5wrzndY0X5QHKTc/preview"
+                      title="July 2024 Hiring Event had a record 1400 job seekers signup"
+                      className="w-full h-64 rounded"
+                      allow="autoplay"
+                    />
+                  </div>
+                )}
               </CardContent>
             </Card>
           ))}
