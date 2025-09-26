@@ -81,16 +81,6 @@ const EventsSection = () => {
             </Card>
           ))}
 
-          {/* Event Flyer */}
-          <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardContent className="p-4">
-              <img 
-                src="/src/assets/job-fair-flyer-2023.jpg" 
-                alt="Sunnyside Job Fair Flyer July 2023"
-                className="w-full h-auto rounded-lg"
-              />
-            </CardContent>
-          </Card>
         </div>
       </div>
     </section>
