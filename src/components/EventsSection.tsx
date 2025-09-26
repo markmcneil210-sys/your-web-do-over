@@ -62,7 +62,7 @@ const EventsSection = () => {
             </div>
           </Card>
 
-          {events.slice(0, 3).map((event, index) => (
+          {events.map((event, index) => (
             <Card 
               key={index} 
               className="transition-all duration-300 hover:shadow-lg"
