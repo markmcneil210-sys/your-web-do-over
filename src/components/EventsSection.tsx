@@ -69,10 +69,21 @@ const EventsSection = () => {
                 </CardHeader>
                 <CardContent className="p-0 mt-4">
                   <h3 className="font-semibold text-xl mb-2">Sunnyside Job Fair</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed mb-4">
                     Thanks to Houston Magic 102, 97.9 the Boxx and Praise 92.1 their support made the Job Fair a success. 
                     We were blessed to serve over 300 Job Seekers.
                   </p>
+                  <div className="bg-muted/30 rounded-lg p-4">
+                    <p className="text-sm font-medium mb-2 text-primary">Radio Interview</p>
+                    <audio 
+                      controls 
+                      className="w-full h-8"
+                      preload="metadata"
+                    >
+                      <source src="/src/assets/career-fair-radio-interview.mp3" type="audio/mpeg" />
+                      Your browser does not support the audio element.
+                    </audio>
+                  </div>
                 </CardContent>
               </div>
             </div>
