@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { LogOut, User } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 const Header = () => {
   const { user, signOut } = useAuth();
@@ -49,12 +49,6 @@ const Header = () => {
               <span className="text-sm text-muted-foreground hidden sm:block">
                 Welcome, {user.email}
               </span>
-              <Link to="/signup">
-                <Button variant="outline" size="sm">
-                  <User className="w-4 h-4 mr-2" />
-                  Register
-                </Button>
-              </Link>
               <Button 
                 variant="ghost" 
                 size="sm"
@@ -66,18 +60,11 @@ const Header = () => {
               </Button>
             </div>
           ) : (
-            <div className="flex items-center space-x-2">
-              <Link to="/auth">
-                <Button variant="outline">
-                  Log In
-                </Button>
-              </Link>
-              <Link to="/signup">
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  SIGN UP
-                </Button>
-              </Link>
-            </div>
+            <Link to="/auth">
+              <Button variant="outline">
+                Log In
+              </Button>
+            </Link>
           )}
         </div>
       </div>
