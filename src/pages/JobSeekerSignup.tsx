@@ -11,9 +11,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/components/ui/use-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ArrowLeft, Briefcase, Calendar } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
 
 const jobSeekerSchema = z.object({
   fullName: z.string().trim().min(1, "Full name is required").max(100, "Name too long"),
@@ -33,19 +32,6 @@ type JobSeekerFormData = z.infer<typeof jobSeekerSchema>;
 const JobSeekerSignup = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [eventPreferences, setEventPreferences] = useState<string[]>([]);
-  const { user, loading } = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!loading && !user) {
-      toast({
-        variant: "destructive",
-        title: "Authentication Required",
-        description: "Please log in to register for job fairs.",
-      });
-      navigate('/auth');
-    }
-  }, [user, loading, navigate]);
 
   const form = useForm<JobSeekerFormData>({
     resolver: zodResolver(jobSeekerSchema),
@@ -73,15 +59,6 @@ const JobSeekerSignup = () => {
   };
 
   const onSubmit = async (data: JobSeekerFormData) => {
-    if (!user) {
-      toast({
-        variant: "destructive",
-        title: "Authentication Required",
-        description: "Please log in to submit your registration.",
-      });
-      return;
-    }
-
     setIsSubmitting(true);
     
     try {
@@ -98,7 +75,6 @@ const JobSeekerSignup = () => {
           job_title: data.jobTitle,
           availability: data.availability,
           event_preferences: data.eventPreferences,
-          user_id: user.id,
         });
 
       if (error) {
@@ -136,21 +112,6 @@ const JobSeekerSignup = () => {
       setIsSubmitting(false);
     }
   };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!user) {
-    return null; // Will redirect to auth page via useEffect
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/5">
