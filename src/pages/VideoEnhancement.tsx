@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { Loader2, Upload } from "lucide-react";
 
 const VideoEnhancement = () => {
   const [transcript, setTranscript] = useState("");
@@ -13,61 +13,47 @@ const VideoEnhancement = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [audioUrl, setAudioUrl] = useState("");
   const [selectedVoice, setSelectedVoice] = useState("alloy");
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState("");
 
-  const videoUrl = "https://drive.google.com/file/d/1pyt9TSzhW8Iyb_mZizWFmwrXr-PeeUSX/preview";
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setUploadedFile(file);
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+      toast.success("File uploaded successfully!");
+    }
+  };
 
-  const extractAudioFromVideo = async (): Promise<string> => {
+  const extractAudioFromFile = async (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
-      const video = document.createElement('video');
-      video.crossOrigin = "anonymous";
-      video.src = videoUrl;
-      
-      video.addEventListener('loadedmetadata', () => {
-        const audioContext = new AudioContext();
-        const source = audioContext.createMediaElementSource(video);
-        const dest = audioContext.createMediaStreamDestination();
-        source.connect(dest);
-        
-        const mediaRecorder = new MediaRecorder(dest.stream);
-        const chunks: Blob[] = [];
-        
-        mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
-        mediaRecorder.onstop = async () => {
-          const blob = new Blob(chunks, { type: 'audio/webm' });
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            const base64 = (reader.result as string).split(',')[1];
-            resolve(base64);
-          };
-          reader.readAsDataURL(blob);
-        };
-        
-        mediaRecorder.start();
-        video.play();
-        
-        video.addEventListener('ended', () => {
-          mediaRecorder.stop();
-          audioContext.close();
-        });
-      });
-      
-      video.addEventListener('error', (e) => {
-        reject(new Error('Failed to load video'));
-      });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64 = (reader.result as string).split(',')[1];
+        resolve(base64);
+      };
+      reader.onerror = () => reject(new Error('Failed to read file'));
+      reader.readAsDataURL(file);
     });
   };
 
   const handleTranscribe = async () => {
+    if (!uploadedFile) {
+      toast.error("Please upload a video or audio file first");
+      return;
+    }
+
     setIsTranscribing(true);
     try {
-      toast.info("Extracting audio from video...");
-      const audioBase64 = await extractAudioFromVideo();
+      toast.info("Processing audio file...");
+      const audioBase64 = await extractAudioFromFile(uploadedFile);
       
       toast.info("Transcribing audio...");
       const { data, error } = await supabase.functions.invoke('transcribe-audio', {
         body: { 
           audio: audioBase64,
-          mimeType: 'audio/webm'
+          mimeType: uploadedFile.type
         }
       });
 
@@ -135,15 +121,33 @@ const VideoEnhancement = () => {
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           <Card>
             <CardHeader>
-              <CardTitle>Original Video</CardTitle>
+              <CardTitle>Upload Video/Audio</CardTitle>
             </CardHeader>
-            <CardContent>
-              <iframe
-                src={videoUrl}
-                className="w-full aspect-video rounded-lg"
-                allow="autoplay"
-                title="Original Video"
-              />
+            <CardContent className="space-y-4">
+              <div className="flex flex-col items-center justify-center border-2 border-dashed border-border rounded-lg p-8">
+                <Upload className="h-12 w-12 text-muted-foreground mb-4" />
+                <label htmlFor="file-upload" className="cursor-pointer">
+                  <Button variant="outline" asChild>
+                    <span>Choose File</span>
+                  </Button>
+                </label>
+                <input
+                  id="file-upload"
+                  type="file"
+                  accept="video/*,audio/*"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+                <p className="text-sm text-muted-foreground mt-2">
+                  {uploadedFile ? uploadedFile.name : "Support for video and audio files"}
+                </p>
+              </div>
+              {previewUrl && uploadedFile?.type.startsWith('video') && (
+                <video controls className="w-full rounded-lg" src={previewUrl} />
+              )}
+              {previewUrl && uploadedFile?.type.startsWith('audio') && (
+                <audio controls className="w-full" src={previewUrl} />
+              )}
             </CardContent>
           </Card>
 
