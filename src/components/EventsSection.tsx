@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import houstonHolidayHiringEvent2025 from "@/assets/houston-holiday-hiring-event-2025.jpg";
 
 const EventsSection = () => {
   const events = [
@@ -38,21 +37,7 @@ const EventsSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Upcoming Events Section */}
-          <div className="md:col-span-2 mb-8">
-            <h3 className="text-2xl font-bold mb-6 text-center">Upcoming Events</h3>
-            <div className="flex justify-center">
-              <Card className="max-w-md transition-all duration-300 hover:shadow-lg">
-                <CardContent className="p-4">
-                  <img 
-                    src={houstonHolidayHiringEvent2025} 
-                    alt="Houston Holiday Hiring Event - November 13th, 2025 from 10am until 1pm at World Harvest Outreach Church, 10800 Scott St., Houston, Texas 77047"
-                    className="w-full h-auto rounded-lg"
-                  />
-                </CardContent>
-              </Card>
-            </div>
-          </div>
+          {/* Upcoming Events Section - Temporarily removed */}
 
           {/* Recent Events Title */}
           <div className="md:col-span-2 mb-6">
