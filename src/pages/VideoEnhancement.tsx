@@ -58,12 +58,17 @@ const VideoEnhancement = () => {
       });
 
       if (error) throw error;
+
+      if (data?.error) {
+        throw new Error(data.error);
+      }
       
       setTranscript(data.text);
       toast.success("Transcription complete!");
     } catch (error) {
       console.error('Transcription error:', error);
-      toast.error("Failed to transcribe audio. Please try again.");
+      const errorMessage = error instanceof Error ? error.message : "Failed to transcribe audio. Please try again.";
+      toast.error(errorMessage);
     } finally {
       setIsTranscribing(false);
     }
