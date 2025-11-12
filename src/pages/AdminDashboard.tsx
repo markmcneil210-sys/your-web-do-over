@@ -5,9 +5,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Download, Users } from "lucide-react";
-import { toast } from "@/components/ui/use-toast";
+import { ArrowLeft, Download, Users, TrendingUp, Briefcase, Clock, Calendar } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
+import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from "recharts";
 
 interface Registration {
   id: string;
@@ -144,6 +145,43 @@ const AdminDashboard = () => {
     });
   };
 
+  // Calculate statistics
+  const stats = {
+    total: registrations.length,
+    experienceBreakdown: registrations.reduce((acc, reg) => {
+      const exp = reg.years_experience;
+      const key = exp === 0 ? 'Entry Level' : exp <= 2 ? '1-2 years' : exp <= 5 ? '3-5 years' : '5+ years';
+      acc[key] = (acc[key] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>),
+    industryBreakdown: registrations.reduce((acc, reg) => {
+      acc[reg.industry] = (acc[reg.industry] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>),
+    availabilityBreakdown: registrations.reduce((acc, reg) => {
+      acc[reg.availability] = (acc[reg.availability] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>),
+    eventPreferences: registrations.reduce((acc, reg) => {
+      reg.event_preferences.forEach(pref => {
+        acc[pref] = (acc[pref] || 0) + 1;
+      });
+      return acc;
+    }, {} as Record<string, number>),
+    registrationTrend: Object.values(
+      registrations.reduce((acc, reg) => {
+        const date = new Date(reg.created_at).toLocaleDateString();
+        if (!acc[date]) {
+          acc[date] = { date, count: 0 };
+        }
+        acc[date].count++;
+        return acc;
+      }, {} as Record<string, { date: string; count: number }>)
+    ).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()),
+  };
+
+  const COLORS = ['hsl(var(--primary))', 'hsl(var(--secondary))', 'hsl(var(--accent))', 'hsl(var(--muted))', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981'];
+
   if (!isAdmin || isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -178,6 +216,173 @@ const AdminDashboard = () => {
             </Button>
           </div>
         </div>
+
+        {/* Statistics Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Registrations</CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.total}</div>
+              <p className="text-xs text-muted-foreground">Job seekers registered</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Industries</CardTitle>
+              <Briefcase className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{Object.keys(stats.industryBreakdown).length}</div>
+              <p className="text-xs text-muted-foreground">Different industries</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Availability Types</CardTitle>
+              <Clock className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{Object.keys(stats.availabilityBreakdown).length}</div>
+              <p className="text-xs text-muted-foreground">Availability options</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Registration Days</CardTitle>
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.registrationTrend.length}</div>
+              <p className="text-xs text-muted-foreground">Days with registrations</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Charts */}
+        {registrations.length > 0 && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            {/* Registration Trend */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Registration Trend</CardTitle>
+                <CardDescription>Registrations over time</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={stats.registrationTrend}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="count" stroke="hsl(var(--primary))" strokeWidth={2} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+
+            {/* Experience Breakdown */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Experience Level</CardTitle>
+                <CardDescription>Distribution by years of experience</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <PieChart>
+                    <Pie
+                      data={Object.entries(stats.experienceBreakdown).map(([name, value]) => ({ name, value }))}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="value"
+                    >
+                      {Object.entries(stats.experienceBreakdown).map((_, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+
+            {/* Industry Breakdown */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Industry Distribution</CardTitle>
+                <CardDescription>Registrations by industry</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={Object.entries(stats.industryBreakdown).map(([name, value]) => ({ name, value }))}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="hsl(var(--primary))" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+
+            {/* Availability Breakdown */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Availability</CardTitle>
+                <CardDescription>Distribution by availability type</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <PieChart>
+                    <Pie
+                      data={Object.entries(stats.availabilityBreakdown).map(([name, value]) => ({ name, value }))}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="value"
+                    >
+                      {Object.entries(stats.availabilityBreakdown).map((_, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+
+            {/* Event Preferences */}
+            <Card className="lg:col-span-2">
+              <CardHeader>
+                <CardTitle>Event Preferences</CardTitle>
+                <CardDescription>Most popular event types</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={Object.entries(stats.eventPreferences).map(([name, value]) => ({ name, value }))}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="hsl(var(--accent))" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         <Card>
           <CardHeader>
