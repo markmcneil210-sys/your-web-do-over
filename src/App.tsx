@@ -9,6 +9,7 @@ import Gallery from "./pages/Gallery";
 import JobSeekerSignup from "./pages/JobSeekerSignup";
 import Auth from "./pages/Auth";
 import VideoEnhancement from "./pages/VideoEnhancement";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/signup" element={<JobSeekerSignup />} />
             <Route path="/video-enhancement" element={<VideoEnhancement />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
