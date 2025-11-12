@@ -1,6 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import nov2025FlyerImage from "@/assets/nov-2025-job-fair-flyer.jpg";
 
 const EventsSection = () => {
+  const upcomingEvents = [
+    {
+      date: "November 13th, 2025",
+      title: "Sunnyside Job Fair",
+      time: "10:00 AM - 1:00 PM",
+      location: "World Harvest Outreach SDA Church",
+      address: "10800 Scott St, Houston, TX 77047",
+      description: "Register at AEAMENTOR.ORG or call 832-391-8105",
+      image: nov2025FlyerImage,
+      highlight: true
+    }
+  ];
+
   const events = [
     {
       date: "October 17th, 2024",
@@ -37,7 +51,42 @@ const EventsSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Upcoming Events Section - Temporarily removed */}
+          {/* Upcoming Events */}
+          {upcomingEvents.length > 0 && (
+            <>
+              <div className="md:col-span-2 mb-6">
+                <h3 className="text-2xl font-bold text-center">Upcoming Events</h3>
+              </div>
+              
+              {upcomingEvents.map((event, index) => (
+                <Card key={index} className="md:col-span-2 border-primary bg-primary/5">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="p-6">
+                      <img 
+                        src={event.image} 
+                        alt={`${event.title} flyer`}
+                        className="w-full h-full object-contain rounded-lg"
+                      />
+                    </div>
+                    <div className="p-6 flex flex-col justify-center">
+                      <CardHeader className="p-0">
+                        <CardTitle className="text-primary text-2xl">{event.date}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="p-0 mt-4">
+                        <h3 className="font-semibold text-2xl mb-3">{event.title}</h3>
+                        <div className="space-y-2 text-muted-foreground">
+                          <p className="font-medium text-foreground">{event.time}</p>
+                          <p>{event.location}</p>
+                          <p>{event.address}</p>
+                          <p className="mt-4 text-primary font-medium">{event.description}</p>
+                        </div>
+                      </CardContent>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </>
+          )}
 
           {/* Recent Events Title */}
           <div className="md:col-span-2 mb-6">
