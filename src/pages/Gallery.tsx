@@ -12,7 +12,6 @@ import hiringEventFlyer2024 from "@/assets/hiring-event-flyer-2024.png";
 import jobFairFlyer2023 from "@/assets/job-fair-flyer-2023.jpg";
 import eventThumbnail from "@/assets/event-thumbnail.jpg";
 import jobFairHero from "@/assets/job-fair-hero.jpg";
-import hiringForHolidaysFlyer2025 from "@/assets/hiring-for-holidays-flyer-2025-updated.jpg";
 import sunnysideJobFairApril2024 from "@/assets/sunnyside-job-fair-april-2024.jpg";
 
 const Gallery = () => {
@@ -66,13 +65,6 @@ const Gallery = () => {
       src: jobFairFlyer2023,
       alt: "Job Fair Flyer 2023",
       title: "2023 Job Fair Flyer",
-      category: "flyers"
-    },
-    {
-      type: "image",
-      src: hiringForHolidaysFlyer2025,
-      alt: "Hiring for the Holidays Job Fair 2025",
-      title: "Holidays Hiring 2025",
       category: "flyers"
     },
     {
