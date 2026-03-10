@@ -1,16 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import nov2025FlyerImage from "@/assets/november-13-job-fair-2025.png";
+import feb2026FlyerImage from "@/assets/sunnyside-job-fair-feb-2026.jpg";
 
 const EventsSection = () => {
   const upcomingEvents = [
     {
-      date: "November 13th, 2025",
-      title: "Sunnyside Job Fair",
-      time: "10:00 AM - 1:00 PM",
-      location: "World Harvest Outreach SDA Church",
+      date: "February 19th, 2026",
+      title: "Pathways of Access to Employment and Entrepreneurship",
+      time: "6:00 PM - 9:00 PM",
+      location: "World Harvest Outreach Church",
       address: "10800 Scott St, Houston, TX 77047",
-      description: "Register at AEAMENTOR.ORG or call 832-391-8105",
-      image: nov2025FlyerImage,
+      description: "For more information: east@wrksolutions.com or 713-493-0052",
+      image: feb2026FlyerImage,
       highlight: true
     }
   ];
