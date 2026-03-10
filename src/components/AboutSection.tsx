@@ -18,15 +18,15 @@ const AboutSection = () => {
             <h3 className="text-2xl font-bold mb-4">SOCIAL IMPACT</h3>
             <div className="grid grid-cols-3 gap-4 mb-6 text-center">
               <div>
-                <div className="text-2xl font-bold text-primary">3,207</div>
+                <div className="text-2xl font-bold text-primary">3,563</div>
                 <div className="text-xs font-medium text-muted-foreground">JOB SEEKERS SERVED</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-primary">237</div>
+                <div className="text-2xl font-bold text-primary">263</div>
                 <div className="text-xs font-medium text-muted-foreground">EMPLOYERS PARTICIPATION</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-primary">824</div>
+                <div className="text-2xl font-bold text-primary">908</div>
                 <div className="text-xs font-medium text-muted-foreground">OPENING POTENTIALLY FILLED</div>
               </div>
             </div>

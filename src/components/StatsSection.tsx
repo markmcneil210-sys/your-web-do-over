@@ -1,8 +1,8 @@
 const StatsSection = () => {
   const stats = [
-    { number: "3,207", label: "JOB SEEKERS SERVED" },
-    { number: "237", label: "EMPLOYERS PARTICIPATION" },
-    { number: "824", label: "OPENING POTENTIALLY FILLED" }
+    { number: "3,563", label: "JOB SEEKERS SERVED" },
+    { number: "263", label: "EMPLOYERS PARTICIPATION" },
+    { number: "908", label: "OPENING POTENTIALLY FILLED" }
   ];
 
   return (
