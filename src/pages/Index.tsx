@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import PillarsSection from "@/components/PillarsSection";
 import StatsSection from "@/components/StatsSection";
 import AboutSection from "@/components/AboutSection";
+import TeamSection from "@/components/TeamSection";
 import VisionSection from "@/components/VisionSection";
 import EventsSection from "@/components/EventsSection";
 import ProgramsSection from "@/components/ProgramsSection";
