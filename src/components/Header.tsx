@@ -41,6 +41,7 @@ const Header = () => {
             <a href="#vision" className="text-foreground hover:text-primary transition-colors">VISION</a>
             <a href="#social-impact" className="text-foreground hover:text-primary transition-colors">SOCIAL IMPACT</a>
             <a href="#programs" className="text-foreground hover:text-primary transition-colors">PROGRAMS</a>
+            <Link to="/sunnyside-initiative" className="text-foreground hover:text-primary transition-colors">INITIATIVE</Link>
             <a href="/gallery" className="text-foreground hover:text-primary transition-colors">GALLERY</a>
             <Link to="/video-enhancement" className="text-foreground hover:text-primary transition-colors">VIDEO TOOL</Link>
           </nav>
