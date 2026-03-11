@@ -10,6 +10,7 @@ import JobSeekerSignup from "./pages/JobSeekerSignup";
 import Auth from "./pages/Auth";
 import VideoEnhancement from "./pages/VideoEnhancement";
 import AdminDashboard from "./pages/AdminDashboard";
+import SunnysideInitiative from "./pages/SunnysideInitiative";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
