@@ -28,7 +28,7 @@ const phases = [
     triz: "Solve contradictions (employers need workers; workers need jobs).",
     icon: Users,
     activities: [
-      "Monthly hiring events in Sunnyside (like your February 19th event)",
+      "Monthly hiring events in Sunnyside",
       "Pre-screened resident workforce matched to employer needs",
       "Skills training and certification programs tied directly to employers",
     ],
