@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import july2026FlyerImage from "@/assets/sunnyside-job-fair-july-2026.png.asset.json";
+import july2026FlyerImage from "@/assets/sunnyside-job-fair-july-2026.webp";
 
 const EventsSection = () => {
   const upcomingEvents = [
@@ -10,7 +10,7 @@ const EventsSection = () => {
       location: "World Harvest Outreach Church",
       address: "10800 Scott St, Houston, TX 77047",
       description: "For more information: east@wrksolutions.com or 713-493-0052",
-      image: july2026FlyerImage.url,
+      image: july2026FlyerImage,
       highlight: true
     }
   ];
@@ -60,12 +60,12 @@ const EventsSection = () => {
               
               {upcomingEvents.map((event, index) => (
               <Card key={index} className="md:col-span-2 border-primary bg-primary/5 overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div className="h-full overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-2">
+                  <div className="self-start overflow-hidden border-b lg:border-b-0 lg:border-r">
                     <img 
                       src={event.image} 
                       alt={`${event.title} flyer`}
-                      className="w-full h-full object-contain"
+                      className="block h-auto w-full"
                     />
                   </div>
                     <div className="p-6 flex flex-col justify-center">
