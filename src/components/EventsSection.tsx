@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import july2026FlyerImage from "@/assets/sunnyside-job-fair-july-2026.png.asset.json";
+import july2026FlyerImage from "@/assets/sunnyside-job-fair-july-2026.webp";
 
 const EventsSection = () => {
   const upcomingEvents = [
@@ -10,7 +10,7 @@ const EventsSection = () => {
       location: "World Harvest Outreach Church",
       address: "10800 Scott St, Houston, TX 77047",
       description: "For more information: east@wrksolutions.com or 713-493-0052",
-      image: july2026FlyerImage.url,
+      image: july2026FlyerImage,
       highlight: true
     }
   ];
