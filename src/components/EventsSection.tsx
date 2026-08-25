@@ -4,13 +4,13 @@ import july2026FlyerImage from "@/assets/sunnyside-job-fair-july-2026.png.asset.
 const EventsSection = () => {
   const upcomingEvents = [
     {
-      date: "February 19th, 2026",
-      title: "Pathways of Access to Employment and Entrepreneurship",
-      time: "6:00 PM - 9:00 PM",
+      date: "July 9th, 2026",
+      title: "Make This Summer Count With a Hot New Job",
+      time: "10:00 AM - 1:00 PM",
       location: "World Harvest Outreach Church",
       address: "10800 Scott St, Houston, TX 77047",
       description: "For more information: east@wrksolutions.com or 713-493-0052",
-      image: feb2026FlyerImage,
+      image: july2026FlyerImage.url,
       highlight: true
     }
   ];
