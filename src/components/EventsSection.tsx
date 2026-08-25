@@ -60,12 +60,12 @@ const EventsSection = () => {
               
               {upcomingEvents.map((event, index) => (
               <Card key={index} className="md:col-span-2 border-primary bg-primary/5 overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div className="h-full overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-2">
+                  <div className="self-start overflow-hidden border-b lg:border-b-0 lg:border-r">
                     <img 
                       src={event.image} 
                       alt={`${event.title} flyer`}
-                      className="w-full h-full object-contain"
+                      className="block h-auto w-full"
                     />
                   </div>
                     <div className="p-6 flex flex-col justify-center">
