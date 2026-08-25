@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import feb2026FlyerImage from "@/assets/sunnyside-job-fair-feb-2026.jpg";
+import july2026FlyerImage from "@/assets/sunnyside-job-fair-july-2026.png.asset.json";
 
 const EventsSection = () => {
   const upcomingEvents = [
