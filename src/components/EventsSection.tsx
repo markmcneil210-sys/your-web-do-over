@@ -38,6 +38,9 @@ const EventsSection = () => {
             <p className="text-xs font-bold uppercase text-primary">Our events</p>
             <h2 className="mt-3 text-5xl md:text-6xl">Where opportunity meets community.</h2>
           </div>
+          <p className="max-w-xl font-medium text-blue-900 lg:justify-self-end">
+            {utilityAssistanceDescription}
+          </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
