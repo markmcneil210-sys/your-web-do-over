@@ -1,20 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import utilityAssistanceFlyer from "@/assets/sunnyside-utility-assistance-september-2026.png.asset.json";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 
 const EventsSection = () => {
-  const upcomingEvents = [
-    {
-      date: "September 17th, 2026",
-      title: "Utility Assistance Program",
-      time: "Appointments at 8:00 AM or 10:00 AM",
-      location: "World Harvest Outreach SDA Church",
-      address: "10800 Scott Street, Houston, TX 77047",
-      description: "Join us for a Utility Assistance Program event designed to help community members manage essential energy costs. Qualified applicants may receive up to $1,200 in utility assistance. Appointments are available at 8:00 AM or 10:00 AM. To check your application status, call (713) 590-2327.",
-      image: utilityAssistanceFlyer.url,
-      highlight: true
-    }
-  ];
+  const upcomingEvents = [];
+
+  const utilityAssistanceDescription = "Join us for a Utility Assistance Program event designed to help community members manage essential energy costs. Qualified applicants may receive up to $1,200 in utility assistance. Appointments are available at 8:00 AM or 10:00 AM. To check your application status, call (713) 590-2327.";
 
   const events = [
     {
@@ -48,6 +38,9 @@ const EventsSection = () => {
             <p className="text-xs font-bold uppercase text-primary">Our events</p>
             <h2 className="mt-3 text-5xl md:text-6xl">Where opportunity meets community.</h2>
           </div>
+          <p className="max-w-xl font-medium text-blue-900 lg:justify-self-end">
+            {utilityAssistanceDescription}
+          </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
