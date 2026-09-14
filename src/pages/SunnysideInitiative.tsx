@@ -40,7 +40,7 @@ const SunnysideInitiative = () => {
       </section>
 
       {/* Workforce Hub Diagram */}
-      <section className="py-16">
+      <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <img
