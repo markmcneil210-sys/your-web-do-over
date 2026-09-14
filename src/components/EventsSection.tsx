@@ -48,9 +48,6 @@ const EventsSection = () => {
             <p className="text-xs font-bold uppercase text-primary">Our events</p>
             <h2 className="mt-3 text-5xl md:text-6xl">Where opportunity meets community.</h2>
           </div>
-          <p className="max-w-xl font-medium text-blue-900 lg:justify-self-end">
-            Join us for a Utility Assistance Program event designed to help community members manage essential energy costs. Qualified applicants may receive up to $1,200 in utility assistance. Appointments are available at 8:00 AM or 10:00 AM. To check your application status, call (713) 590-2327.
-          </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
