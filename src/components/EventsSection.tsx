@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import july2026FlyerImage from "@/assets/sunnyside-job-fair-july-2026.webp";
+import { CalendarDays, Clock, MapPin } from "lucide-react";
 
 const EventsSection = () => {
   const upcomingEvents = [
@@ -40,11 +41,14 @@ const EventsSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-muted/30">
+    <section id="events" className="bg-muted/40 py-20 md:py-28">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-6">Our Events</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+        <div className="mb-12 grid gap-6 lg:grid-cols-2 lg:items-end">
+          <div>
+            <p className="text-xs font-bold uppercase text-primary">Our events</p>
+            <h2 className="mt-3 text-5xl md:text-6xl">Where opportunity meets community.</h2>
+          </div>
+          <p className="max-w-xl text-muted-foreground lg:justify-self-end">
             The AEA and its partners host successful hiring events that are well attended 
             and provide numerous job opportunities for seekers in attendance.
           </p>
@@ -54,31 +58,31 @@ const EventsSection = () => {
           {/* Upcoming Events */}
           {upcomingEvents.length > 0 && (
             <>
-              <div className="md:col-span-2 mb-6">
-                <h3 className="text-2xl font-bold text-center">Upcoming Events</h3>
+               <div className="md:col-span-2">
+                 <h3 className="text-xs font-bold uppercase text-primary">Upcoming event</h3>
               </div>
               
               {upcomingEvents.map((event, index) => (
-              <Card key={index} className="md:col-span-2 border-primary bg-primary/5 overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-2">
-                  <div className="self-start overflow-hidden border-b lg:border-b-0 lg:border-r">
+              <Card key={index} className="overflow-hidden border md:col-span-2">
+                <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr]">
+                  <div className="self-start overflow-hidden border-b bg-card lg:border-b-0 lg:border-r">
                     <img 
                       src={event.image} 
                       alt={`${event.title} flyer`}
                       className="block h-auto w-full"
                     />
                   </div>
-                    <div className="p-6 flex flex-col justify-center">
+                    <div className="flex flex-col justify-center p-8 md:p-12">
                       <CardHeader className="p-0">
-                        <CardTitle className="text-primary text-2xl">{event.date}</CardTitle>
+                        <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-md bg-primary text-primary-foreground"><CalendarDays /></div>
+                        <CardTitle className="text-4xl md:text-5xl">{event.title}</CardTitle>
                       </CardHeader>
-                      <CardContent className="p-0 mt-4">
-                        <h3 className="font-semibold text-2xl mb-3">{event.title}</h3>
-                        <div className="space-y-2 text-muted-foreground">
-                          <p className="font-medium text-foreground">{event.time}</p>
-                          <p>{event.location}</p>
-                          <p>{event.address}</p>
-                          <p className="mt-4 text-primary font-medium">{event.description}</p>
+                      <CardContent className="mt-7 p-0">
+                        <div className="space-y-4 text-muted-foreground">
+                          <p className="flex items-center gap-3 font-semibold text-foreground"><CalendarDays className="h-5 w-5 text-primary" />{event.date}</p>
+                          <p className="flex items-center gap-3"><Clock className="h-5 w-5 text-primary" />{event.time}</p>
+                          <p className="flex items-start gap-3"><MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><span>{event.location}<br />{event.address}</span></p>
+                          <p className="border-t pt-5 text-sm font-medium text-primary">{event.description}</p>
                         </div>
                       </CardContent>
                     </div>
@@ -89,18 +93,18 @@ const EventsSection = () => {
           )}
 
           {/* Recent Events Title */}
-          <div className="md:col-span-2 mb-6">
-            <h3 className="text-2xl font-bold text-center">Recent Events</h3>
+          <div className="mt-10 md:col-span-2">
+            <h3 className="text-xs font-bold uppercase text-primary">Recent events</h3>
           </div>
 
           {/* Featured Event with Image */}
-          <Card className="md:col-span-2 border-primary bg-primary/5">
+          <Card className="md:col-span-2 overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
                 <img 
                   src="/src/assets/sunnyside-job-fair-2023.png" 
                   alt="Sunnyside Job Fair 2023 event photo"
-                  className="w-full h-64 object-cover rounded-lg"
+                   className="h-64 w-full object-cover"
                 />
               </div>
               <div className="p-6">
@@ -113,7 +117,7 @@ const EventsSection = () => {
                     Thanks to Houston Magic 102, 97.9 the Boxx and Praise 92.1 their support made the Job Fair a success. 
                     We were blessed to serve over 300 Job Seekers.
                   </p>
-                  <div className="bg-muted/30 rounded-lg p-4">
+                <div className="rounded-md bg-muted/50 p-4">
                     <p className="text-sm font-medium mb-2 text-primary">Radio Interview</p>
                     <audio 
                       controls 
@@ -132,7 +136,7 @@ const EventsSection = () => {
           {events.map((event, index) => (
             <Card 
               key={index} 
-              className={`transition-all duration-300 hover:shadow-lg ${
+              className={`transition-all duration-300 hover:border-primary ${
                 event.date === "October 17th, 2024" ? "md:col-span-2" : ""
               }`}
             >
@@ -147,12 +151,12 @@ const EventsSection = () => {
                   {event.description}
                 </p>
                 {event.date === "October 17th, 2024" && (
-                  <div className="bg-muted/30 rounded-lg p-4">
+                  <div className="rounded-md bg-muted/50 p-4">
                     <p className="text-sm font-medium mb-2 text-primary">Event Video</p>
                     <iframe
                       src="https://drive.google.com/file/d/1TV1k3nMaBLsTQS3Jy5wrzndY0X5QHKTc/preview"
                       title="July 2024 Hiring Event had a record 1400 job seekers signup"
-                      className="w-full h-64 rounded"
+                      className="h-64 w-full rounded-md"
                       allow="autoplay"
                     />
                   </div>
