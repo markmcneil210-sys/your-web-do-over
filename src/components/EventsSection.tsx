@@ -2,18 +2,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 
 const EventsSection = () => {
-  const upcomingEvents = [
-    {
-      date: "September 17th, 2026",
-      title: "Utility Assistance Program",
-      time: "Appointments at 8:00 AM or 10:00 AM",
-      location: "World Harvest Outreach SDA Church",
-      address: "10800 Scott Street, Houston, TX 77047",
-      description: "Join us for a Utility Assistance Program event designed to help community members manage essential energy costs. Qualified applicants may receive up to $1,200 in utility assistance. Appointments are available at 8:00 AM or 10:00 AM. To check your application status, call (713) 590-2327.",
-      image: utilityAssistanceFlyer.url,
-      highlight: true
-    }
-  ];
+  const upcomingEvents = [];
+
+  const utilityAssistanceDescription = "Join us for a Utility Assistance Program event designed to help community members manage essential energy costs. Qualified applicants may receive up to $1,200 in utility assistance. Appointments are available at 8:00 AM or 10:00 AM. To check your application status, call (713) 590-2327.";
 
   const events = [
     {
