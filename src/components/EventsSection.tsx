@@ -1,17 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import july2026FlyerImage from "@/assets/sunnyside-job-fair-july-2026.webp";
+import utilityAssistanceFlyer from "@/assets/sunnyside-utility-assistance-september-2026.png.asset.json";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 
 const EventsSection = () => {
   const upcomingEvents = [
     {
-      date: "July 9th, 2026",
-      title: "Make This Summer Count With a Hot New Job",
-      time: "10:00 AM - 1:00 PM",
-      location: "World Harvest Outreach Church",
-      address: "10800 Scott St, Houston, TX 77047",
-      description: "For more information: east@wrksolutions.com or 713-493-0052",
-      image: july2026FlyerImage,
+      date: "September 17th, 2026",
+      title: "Utility Assistance Program",
+      time: "Appointments at 8:00 AM or 10:00 AM",
+      location: "World Harvest Outreach SDA Church",
+      address: "10800 Scott Street, Houston, TX 77047",
+      description: "Qualified applicants could receive up to $1,200 in utility assistance. For program application status, call (713) 590-2327.",
+      image: utilityAssistanceFlyer.url,
       highlight: true
     }
   ];
