@@ -1,5 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
-
 const teamMembers = [
   {
     name: "Mark McNeil",
@@ -20,33 +18,27 @@ With a lifelong passion for service and community impact, Mark is dedicated to h
 
 const TeamSection = () => {
   return (
-    <section id="team" className="py-20 bg-muted/30">
+    <section id="team" className="bg-muted/40 py-20 md:py-28">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground">
-          Our Team
-        </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Meet the leaders driving our mission forward.
-        </p>
+        <p className="text-xs font-bold uppercase text-primary">Leadership</p>
+        <h2 className="mt-3 text-5xl md:text-6xl">Meet the people driving our mission.</h2>
 
-        <div className="max-w-3xl mx-auto space-y-8">
+        <div className="mt-12">
           {teamMembers.map((member) => (
-            <Card key={member.name} className="overflow-hidden border-primary/10">
-              <CardContent className="p-8">
-                <div className="flex flex-col items-center text-center mb-6">
-                  <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center text-primary text-3xl font-bold mb-4">
+            <article key={member.name} className="grid gap-10 border-y py-10 lg:grid-cols-[0.35fr_0.65fr] lg:py-14">
+                <div>
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-secondary font-display text-3xl text-secondary-foreground">
                     {member.name.split(" ").map((n) => n[0]).join("")}
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground">{member.name}</h3>
-                  <span className="text-primary font-medium">{member.title}</span>
+                  <h3 className="mt-5 text-3xl">{member.name}</h3>
+                  <span className="mt-1 block text-xs font-bold uppercase text-primary">{member.title}</span>
                 </div>
-                <div className="text-muted-foreground leading-relaxed space-y-4">
+                <div className="space-y-4 leading-relaxed text-muted-foreground">
                   {member.bio.split("\n\n").map((paragraph, i) => (
                     <p key={i}>{paragraph}</p>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+            </article>
           ))}
         </div>
       </div>

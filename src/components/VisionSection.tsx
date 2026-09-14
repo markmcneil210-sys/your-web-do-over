@@ -10,24 +10,19 @@ const VisionSection = () => {
   ];
 
   return (
-    <section id="vision" className="py-16 bg-background">
+    <section id="vision" className="bg-background py-20 md:py-28">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h3 className="text-primary text-lg font-semibold mb-2">Our Vision</h3>
-          <h2 className="text-4xl font-bold mb-6">We Have Vision</h2>
-          <h3 className="text-2xl font-semibold text-muted-foreground mb-8">
-            Rebuild Networking Vision for Youth Program
-          </h3>
+        <div className="mb-12 max-w-3xl">
+          <p className="text-xs font-bold uppercase text-primary">Our vision</p>
+          <h2 className="mt-3 text-5xl md:text-6xl">A future where every young person can thrive.</h2>
         </div>
         
-        <div className="max-w-4xl mx-auto">
-          <ul className="space-y-4">
+        <div>
+          <ul className="grid border-y md:grid-cols-2">
             {visionPoints.map((point, index) => (
-              <li key={index} className="flex items-start space-x-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
-                  {index + 1}
-                </span>
-                <p className="text-muted-foreground leading-relaxed">{point}</p>
+              <li key={index} className={`flex items-start gap-5 border-b p-6 last:border-b-0 md:p-8 ${index % 2 === 0 ? "md:border-r" : ""} ${index >= visionPoints.length - 2 ? "md:border-b-0" : ""}`}>
+                <span className="font-display text-3xl text-primary">{String(index + 1).padStart(2, "0")}</span>
+                <p className="leading-relaxed text-muted-foreground">{point}</p>
               </li>
             ))}
           </ul>
