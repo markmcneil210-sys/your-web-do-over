@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import utilityAssistanceFlyer from "@/assets/sunnyside-utility-assistance-september-2026.png.asset.json";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 
 const EventsSection = () => {
